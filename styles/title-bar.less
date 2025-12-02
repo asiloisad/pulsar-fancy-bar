@@ -200,17 +200,31 @@
       margin-top: -4px;
       padding: 0 8px;
       padding-top: 4px;
-      border-radius: 0 0 4px 4px;
       color: @text-color;
-      transition: background-color 0.1s ease;
 
-      &.open,
-      &.focused,
-      &:hover {
+      // Rounded highlight area (visual only)
+      &::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        height: 22px;
+        margin-top: 2px;
+        transform: translateY(-50%);
+        border-radius: 4px;
+        background-color: transparent;
+        transition: background-color 0.1s ease;
+        z-index: -1;
+      }
+
+      &.open::before,
+      &.focused::before,
+      &:hover::before {
         background-color: fade(@text-color, 8%);
       }
 
-      &:active {
+      &:active::before {
         background-color: fade(@text-color, 5%);
       }
 
