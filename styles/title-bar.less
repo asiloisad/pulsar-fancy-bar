@@ -1,9 +1,53 @@
 @import "ui-variables";
 
-// Windows 11 / Electron 30 native style
-@title-bar-height: 32px;
-@control-width: 46px;
-@control-height: @title-bar-height;
+// ============================================================================
+// CSS Custom Properties (User Customizable)
+// Override these in your styles.less to customize the title bar appearance.
+// Example: :root { --title-bar-height: 40px; }
+// ============================================================================
+
+:root {
+  // Layout
+  --title-bar-height: 32px;
+  --title-bar-control-width: 46px;
+  --title-bar-icon-size: 24px;
+  --title-bar-icon-margin: 8px;
+
+  // Menu
+  --title-bar-menu-font-size: 12px;
+  --title-bar-menu-item-height: 28px;
+  --title-bar-menu-item-padding: 12px;
+  --title-bar-menu-item-margin: 4px;
+  --title-bar-menu-item-radius: 4px;
+  --title-bar-menu-box-radius: 8px;
+  --title-bar-menu-box-min-width: 200px;
+  --title-bar-menu-box-shadow: 0 4px 12px fade(#000, 12%);
+  --title-bar-menu-label-padding: 8px;
+  --title-bar-menu-label-radius: 4px;
+
+  // Title
+  --title-bar-title-font-size: 12px;
+
+  // Transitions
+  --title-bar-transition-fast: 0.05s;
+  --title-bar-transition-normal: 0.1s;
+  --title-bar-transition-slow: 0.15s;
+
+  // Windows 11 theme colors
+  --title-bar-close-hover-bg: #c42b1c;
+  --title-bar-close-hover-color: #fff;
+
+  // Yosemite theme colors
+  --title-bar-yosemite-close: #ff5f57;
+  --title-bar-yosemite-minimize: #febc2e;
+  --title-bar-yosemite-maximize: #28c840;
+  --title-bar-yosemite-blurred: #ddd;
+}
+
+// Internal Less variables (mapped from CSS custom properties for compatibility)
+@title-bar-height: var(--title-bar-height);
+@control-width: var(--title-bar-control-width);
+@control-height: var(--title-bar-height);
 @menu-height: 24px;
 
 .title-bar-replacer {
@@ -33,11 +77,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 24px;
+    width: var(--title-bar-icon-size);
     height: 100%;
     order: 0;
     flex-shrink: 0;
-    margin-left: 8px;
+    margin-left: var(--title-bar-icon-margin);
 
     svg {
       display: block;
@@ -62,7 +106,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    font-size: 12px;
+    font-size: var(--title-bar-title-font-size);
     font-weight: 400;
     color: @text-color;
     width: max-content;
@@ -109,7 +153,7 @@
         height: 100%;
         color: @text-color;
         cursor: default;
-        transition: background-color 0.1s ease;
+        transition: background-color var(--title-bar-transition-normal) ease;
 
         svg {
           display: block;
@@ -139,8 +183,8 @@
         &.btn-close {
           order: 3;
           &:hover {
-            background-color: #c42b1c;
-            color: #fff;
+            background-color: var(--title-bar-close-hover-bg);
+            color: var(--title-bar-close-hover-color);
           }
           &:active {
             background-color: fade(#c42b1c, 80%);
@@ -185,10 +229,10 @@
     width: auto;
     height: 100%;
     order: 1;
-    padding-left: 8px;
+    padding-left: var(--title-bar-menu-label-padding);
     font-family: "Segoe UI", @font-family;
     font-weight: 400;
-    font-size: 12px;
+    font-size: var(--title-bar-menu-font-size);
     overflow: visible;
     z-index: 2;
 
@@ -217,11 +261,11 @@
       align-items: center;
       height: calc(100% + 4px);
       margin-top: -4px;
-      padding: 0 8px;
+      padding: 0 var(--title-bar-menu-label-padding);
       padding-top: 4px;
       opacity: 1;
       transform: translateX(0);
-      transition: opacity 0.15s ease, transform 0.15s ease;
+      transition: opacity var(--title-bar-transition-slow) ease, transform var(--title-bar-transition-slow) ease;
 
       // Stagger animation for each menu label
       @label-delay: 0.02s;
@@ -245,9 +289,9 @@
         height: 22px;
         margin-top: 2px;
         transform: translateY(-50%);
-        border-radius: 4px;
+        border-radius: var(--title-bar-menu-label-radius);
         background-color: transparent;
-        transition: background-color 0.1s ease;
+        transition: background-color var(--title-bar-transition-normal) ease;
         z-index: -1;
       }
 
@@ -268,11 +312,11 @@
         top: 100%;
         left: 0;
         margin-top: 2px;
-        min-width: 200px;
+        min-width: var(--title-bar-menu-box-min-width);
         background-color: @overlay-background-color;
         border: 1px solid @overlay-border-color;
-        border-radius: 8px;
-        box-shadow: 0 4px 12px fade(#000, 12%);
+        border-radius: var(--title-bar-menu-box-radius);
+        box-shadow: var(--title-bar-menu-box-shadow);
         padding: 4px 0;
         z-index: 99999;
         transform: translate(-4px, 0);
@@ -299,12 +343,12 @@
           position: relative;
           align-items: center;
           justify-content: space-between;
-          height: 28px;
-          padding: 0 12px;
-          margin: 2px 4px;
-          border-radius: 4px;
+          height: var(--title-bar-menu-item-height);
+          padding: 0 var(--title-bar-menu-item-padding);
+          margin: 2px var(--title-bar-menu-item-margin);
+          border-radius: var(--title-bar-menu-item-radius);
           color: @text-color;
-          transition: background-color 0.05s ease;
+          transition: background-color var(--title-bar-transition-fast) ease;
 
           &.disabled {
             color: @text-color-subtle;
@@ -434,7 +478,7 @@
         position: relative;
         width: 20px;
         background-color: transparent;
-        transition: all 0.15s ease;
+        transition: all var(--title-bar-transition-slow) ease;
 
         svg {
           display: none;
@@ -446,7 +490,7 @@
           width: 12px;
           height: 12px;
           border-radius: 50%;
-          transition: background-color 0.15s ease;
+          transition: background-color var(--title-bar-transition-slow) ease;
         }
 
         &:hover,
@@ -457,30 +501,30 @@
         &.btn-close {
           order: 3;
           &::before {
-            background-color: #ff5f57;
+            background-color: var(--title-bar-yosemite-close);
           }
           &:hover::before {
-            background-color: darken(#ff5f57, 10%);
+            background-color: color-mix(in srgb, var(--title-bar-yosemite-close) 90%, black);
           }
         }
 
         &.btn-minimize {
           order: 2;
           &::before {
-            background-color: #febc2e;
+            background-color: var(--title-bar-yosemite-minimize);
           }
           &:hover::before {
-            background-color: darken(#febc2e, 10%);
+            background-color: color-mix(in srgb, var(--title-bar-yosemite-minimize) 90%, black);
           }
         }
 
         &.btn-maximize {
           order: 1;
           &::before {
-            background-color: #28c840;
+            background-color: var(--title-bar-yosemite-maximize);
           }
           &:hover::before {
-            background-color: darken(#28c840, 10%);
+            background-color: color-mix(in srgb, var(--title-bar-yosemite-maximize) 90%, black);
           }
         }
       }
@@ -501,6 +545,6 @@ body.is-blurred {
     .title-bar
     .control-wrap:not(:hover)
     button::before {
-    background-color: #ddd;
+    background-color: var(--title-bar-yosemite-blurred);
   }
 }

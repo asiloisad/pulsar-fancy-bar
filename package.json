@@ -9,7 +9,7 @@
   "repository": "https://github.com/asiloisad/pulsar-title-bar",
   "license": "MIT",
   "engines": {
-    "atom": ">=1.53.0 <2.0.0"
+    "atom": ">=1.100.0 <2.0.0"
   },
   "providedServices": {
     "title-bar": {
@@ -67,36 +67,8 @@
       "type": "boolean",
       "default": false
     },
-    "autoSelectColor": {
-      "order": 8,
-      "title": "Automatically Select Title Bar Colors",
-      "description": "The ui-variables will be used as a base for the title bar design.",
-      "type": "boolean",
-      "default": true
-    },
-    "baseColor": {
-      "order": 9,
-      "title": "Base Color",
-      "description": "Color of the title bar background",
-      "type": "color",
-      "default": "#212326"
-    },
-    "highlightColor": {
-      "order": 10,
-      "title": "Highlight Color",
-      "description": "Color of the highlighted fields in the menu bar",
-      "type": "color",
-      "default": "#3A465B"
-    },
-    "textColor": {
-      "order": 11,
-      "title": "Text Color",
-      "description": "Base for text and icons in the title bar",
-      "type": "color",
-      "default": "#a1adad"
-    },
     "controlTheme": {
-      "order": 12,
+      "order": 8,
       "title": "Window Controls Theme",
       "type": "string",
       "enum": [
@@ -106,7 +78,7 @@
       "default": "Windows 11"
     },
     "controlLocation": {
-      "order": 13,
+      "order": 9,
       "title": "Reverse Window Controls Location",
       "type": "boolean",
       "default": false
